@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from
 
 const UserLog = props =>{
     return( 
+      <Modal visible={props.logInVis} animationType='slide' style={styles.backGround}>
     <View style={styles.userLoginCont}>
             <TextInput style={styles.userTextFieltd}
     placeholder='UserName'/>
@@ -10,9 +11,10 @@ const UserLog = props =>{
     placeholder='Password'/>
     <View style={styles.buttonContainer}>
         <Button title="Log In" color="#c4c4c4"></Button>
-        <Button title="Sign Up" color="#c4c4c4"></Button>
+        <Button title="Sign Up" color="#c4c4c4" onPress={props.closeLogIn}></Button>
     </View>
     </View>
+    </Modal>
   )
 };
 
@@ -37,6 +39,9 @@ const styles = StyleSheet.create({
       buttonContainer:{
           flex: 0.3,
         justifyContent: 'space-around'
+      },
+      backGround:{
+        backgroundColor:'#ffce94'
       }
 });
 

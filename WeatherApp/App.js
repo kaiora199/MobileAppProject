@@ -4,12 +4,31 @@ import React, {useState, useEffect} from 'react';
 import TopNav from './components/topNav'
 import BotNav from './components/botNav'
 import UserLog from './components/userLogin'
+import WeatherLines from './components/weatherData';
+import WeatherLinesFromApi from './components/weatherFromApi';
 
 export default function App() {
+  const [isLoginOpen, openLogin] = useState(false);
+  const [isWDataOpen, openWData] = useState(false)
+  const [isWFromApiOpen, openWFromApi] = useState(false)
+  const closeLogIn = () =>{
+    openLogin(false)
+  }
+  const closeWeatherData = () =>{
+    openWData(false)
+  }
+  const closeWeatherFromApi = () =>{
+    openWFromApi(false)
+  }
   return (
     <View style={styles.container}>
       <TopNav></TopNav>
-      <UserLog></UserLog>
+      <UserLog logInVis={isLoginOpen} closeLogIn={closeLogIn}></UserLog>
+      <Button title="login" onPress={()=>openLogin(true)}></Button>
+      <Button title="weather data" onPress={()=>openWData(true)}></Button>
+      <Button title="weather api" onPress={()=>openWFromApi(true)}></Button>
+      <WeatherLines wDataVis={isWDataOpen} closeWData={closeWeatherData}></WeatherLines>
+      <WeatherLinesFromApi wApiVis={isWFromApiOpen} closeWApi={closeWeatherFromApi}></WeatherLinesFromApi>
       <BotNav></BotNav>
       <StatusBar style="auto" />
     </View>
