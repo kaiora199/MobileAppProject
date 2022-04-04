@@ -3,18 +3,20 @@ import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from
 import TopNav from './topNav';
 import BotNav from './botNav';
 
-const UserLog = props =>{
-    return(
-      <Modal visible={props.logInVis} animationType='slide' transparent={true}>
+const WeatherComplain = props =>{
+    return( 
+      <Modal visible={props.wCompVis} animationType='slide'  transparent={true}>
         <TopNav></TopNav>
-    <View style={styles.userLoginCont}>
-            <TextInput style={styles.userTextFieltd}
-    placeholder='UserName'/>
-                <TextInput style={styles.userTextFieltd}
-    placeholder='Password'/>
+    <View style={styles.weatherCont}>
+      <View style={styles.complainCont}>
+      <Text>Weather data location</Text>
+      <Text>Weather data comment</Text>
+      <Text>Weather data line3</Text>
+      <Text>Weather data line4</Text>
+      <Text>Weather comment date</Text>
+      </View>
     <View style={styles.buttonContainer}>
-        <Button title="Log In" color="#c4c4c4"></Button>
-        <Button title="Sign Up" color="#c4c4c4" onPress={props.closeLogIn}></Button>
+        <Button onPress={props.closeComp} title="Close this view" color="#c4c4c4"></Button>
     </View>
     </View>
     <BotNav></BotNav>
@@ -23,7 +25,7 @@ const UserLog = props =>{
 };
 
 const styles = StyleSheet.create({
-    userLoginCont:{
+    weatherCont:{
         flex: 0.8,
         flexDirection: 'column',
         width: 400,
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 0.5
       },
-      userTextFieltd:{
+      weathTextField:{
           borderWidth: 1,
           padding: 10
       },
@@ -44,6 +46,14 @@ const styles = StyleSheet.create({
           flex: 0.3,
         justifyContent: 'space-around'
       },
+      complainCont:{
+        flex: 1,
+        flexDirection: 'column',
+        alignContent: 'center',
+        flexWrap: 'wrap',
+        borderWidth: 0.1,
+        borderRadius: 5,
+      }
 });
 
-export default UserLog;
+export default WeatherComplain;

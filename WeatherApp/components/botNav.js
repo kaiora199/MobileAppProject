@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Modal, Button} from 'react-nat
 const TopNav = props =>{
     return( 
     <View style={styles.topNavContainer}>
-        <Button title="Bot Bar Action 1" color="#ffce94"></Button>
+        <Button title="HOME" color="#ffce94"></Button>
         <Button title="Bot Bar Action 2" color="#ffce94"></Button>
     </View>
   )

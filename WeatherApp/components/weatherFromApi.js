@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
+import TopNav from './topNav';
+import BotNav from './botNav';
 
 const WeatherLinesFromApi = props =>{
     return( 
-      <Modal visible={props.wApiVis} animationType='slide'>
+      <Modal visible={props.wApiVis} animationType='slide'  transparent={true}>
+        <TopNav></TopNav>
     <View style={styles.weatherApiCont}>
       <View style={styles.dataApiCont}>
         <Text>Location of weather data</Text>
@@ -22,13 +25,14 @@ const WeatherLinesFromApi = props =>{
         <Button onPress={props.closeWApi} title="Close weather forecast" color="#c4c4c4"></Button>
     </View>
     </View>
+    <BotNav></BotNav>
     </Modal>
   )
 };
 
 const styles = StyleSheet.create({
     weatherApiCont:{
-        flex: 1,
+        flex: 0.8,
         flexDirection: 'column',
         width: 400,
         padding:10,
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: '#ffce94',
         borderRadius: 5,
-        borderWidth: 1
+        borderWidth: 0.5
       },
       dataApiCont:{
         flex: 0.6,

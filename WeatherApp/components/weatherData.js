@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
+import TopNav from './topNav';
+import BotNav from './botNav';
 
 const WeatherLines = props =>{
     return( 
-      <Modal visible={props.wDataVis} animationType='slide'>
+      <Modal visible={props.wDataVis} animationType='slide'  transparent={true}>
+        <TopNav></TopNav>
     <View style={styles.weatherCont}>
       <View style={styles.dataCont}>
       <Text>Weather data line1</Text>
@@ -23,13 +26,14 @@ const WeatherLines = props =>{
         <Button onPress={props.closeWData} title="Post comment" color="#c4c4c4"></Button>
     </View>
     </View>
+    <BotNav></BotNav>
     </Modal>
   )
 };
 
 const styles = StyleSheet.create({
     weatherCont:{
-        flex: 0.5,
+        flex: 0.8,
         flexDirection: 'column',
         width: 400,
         padding:10,
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: '#ffce94',
         borderRadius: 5,
-        borderWidth: 1
+        borderWidth: 0.5
       },
       weathTextField:{
           borderWidth: 1,
