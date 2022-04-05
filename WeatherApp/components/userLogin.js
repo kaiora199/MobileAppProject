@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
-import {auth} from '../firebase'
+import {auth} from '../firebase';
+import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
+
 
 const UserLog = props =>{
     const [email, setEmail] = useState("")
@@ -8,7 +11,7 @@ const UserLog = props =>{
 
     const handleSignup = () => {
       auth
-      .createUserWithEmailAndPassword(email, password)
+      createUserWithEmailAndPassword(auth, email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log(user.email);
@@ -16,7 +19,24 @@ const UserLog = props =>{
       .catch(error => alert(error.message));
     }
 
+    const handleLogin = () => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user.email);
+          // ...
+          props.setE(email);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+      });
+    }
+     
+    
 
+    
     return( 
     <View style={styles.userLoginCont}>
             <TextInput style={styles.userTextFieltd}
@@ -28,7 +48,10 @@ const UserLog = props =>{
               onChangeText={text => setPassword(text)}
               placeholder='Password'/>
     <View style={styles.buttonContainer}>
-        <Button title="Log In" color="#c4c4c4"></Button>
+        <Button onPress={handleLogin} 
+                title="Log In" 
+                color="#c4c4c4">
+        </Button>
         <Button onPress={handleSignup}
                 title="Sign Up" 
                 color="#c4c4c4">
@@ -61,5 +84,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
       }
 });
+
 
 export default UserLog;

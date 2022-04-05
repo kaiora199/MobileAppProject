@@ -4,12 +4,16 @@ import React, {useState, useEffect} from 'react';
 import TopNav from './components/topNav'
 import BotNav from './components/botNav'
 import UserLog from './components/userLogin'
+import {data} from './components/userLogin'
 
 export default function App() {
+
+  const [userEmail, setUEmail] = useState(' ');
+
   return (
     <View style={styles.container}>
-      <TopNav></TopNav>
-      <UserLog></UserLog>
+      <TopNav user={userEmail} clearE={setUEmail} ></TopNav>
+      <UserLog setE={setUEmail}></UserLog>
       <BotNav></BotNav>
       <StatusBar style="auto" />
     </View>
