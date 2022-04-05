@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@react-navigation/native-stack": "^6.6.1",
+    "firebase": "^9.6.10"
+  }
+}
