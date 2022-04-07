@@ -9,14 +9,12 @@ const WeatherLines = props =>{
         <TopNav></TopNav>
     <View style={styles.weatherCont}>
       <View style={styles.dataCont}>
-      <Text>Weather data line1</Text>
-      <Text>Weather data line2</Text>
-      <Text>Weather data line3</Text>
-      <Text>Weather data line4</Text>
-      <Text>Weather data line5</Text>
-      <Text>Weather data line6</Text>
-      <Text>Weather data line7</Text>
-      <Text>Weather data line8</Text>
+      <Text>location</Text>
+      <Text>weather.main</Text>
+      <Text>main.temp</Text>
+      <Text>main.feels_like</Text>
+      <Text>wind</Text>
+      <Text>clouds</Text>
       </View>
             <TextInput style={styles.weathTextField}
     placeholder='Your location'/>

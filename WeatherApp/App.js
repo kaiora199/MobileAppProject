@@ -39,6 +39,7 @@ export default function App() {
       <WeatherLines wDataVis={isWDataOpen} closeWData={closeWeatherData}></WeatherLines>
       <WeatherLinesFromApi wApiVis={isWFromApiOpen} closeWApi={closeWeatherFromApi}></WeatherLinesFromApi>
       <WeatherComplain wCompVis={isCompOpen} closeComp={closeWeatherComplaints}></WeatherComplain>
+      <BotNav></BotNav>
       </View>
   );}
       

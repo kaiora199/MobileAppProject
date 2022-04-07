@@ -23,7 +23,7 @@ const BotNav = props =>{
         <Button title="Home" color="#ffce94"></Button>
         <TouchableOpacity onPress={LogOut}>
             <Text>{props.user}</Text>
-            <Text>Password</Text>
+            <Text>Click to logout</Text>
 
         </TouchableOpacity>
         <Button title="Logo" color="#ffce94"></Button>

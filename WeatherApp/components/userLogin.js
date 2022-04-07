@@ -32,9 +32,10 @@ const UserLog = props =>{
           const errorCode = error.code;
           const errorMessage = error.message;
       });
+      props.closeLogIn();
     }
      
-    
+     
 
     
     return( 
