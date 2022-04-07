@@ -1,12 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button} from 'react-native';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase';
+
+
+
 
 const BotNav = props =>{
+
+   
+    const LogOut = () => {
+        auth
+        .signOut()
+        console.log('Signed out')
+        props.clearE(' ');
+    }
+
+
+
     return( 
     <View style={styles.topNavContainer}>
         <Button title="Home" color="#ffce94"></Button>
-        <TouchableOpacity>
-            <Text>Username</Text>
+        <TouchableOpacity onPress={LogOut}>
+            <Text>{props.user}</Text>
             <Text>Password</Text>
 
         </TouchableOpacity>

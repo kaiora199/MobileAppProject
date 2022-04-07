@@ -7,12 +7,14 @@ import UserLog from './components/userLogin'
 import WeatherLines from './components/weatherData';
 import WeatherLinesFromApi from './components/weatherFromApi';
 import WeatherComplain from './components/weatherComplaints'
+import {data} from './components/userLogin'
 
 export default function App() {
   const [isLoginOpen, openLogin] = useState(false);
   const [isWDataOpen, openWData] = useState(false)
   const [isWFromApiOpen, openWFromApi] = useState(false)
   const [isCompOpen, openComplaints] = useState(false)
+  const [userEmail, setUEmail] = useState(' ');
 
   const closeLogIn = () =>{
     openLogin(false)
@@ -28,8 +30,8 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <TopNav></TopNav>
-      <UserLog logInVis={isLoginOpen} closeLogIn={closeLogIn}></UserLog>
+      <TopNav user={userEmail} clearE={setUEmail}></TopNav>
+      <UserLog logInVis={isLoginOpen} closeLogIn={closeLogIn} setE={setUEmail}></UserLog>
       <Button title="login" onPress={()=>openLogin(true)}></Button>
       <Button title="weather data" onPress={()=>openWData(true)}></Button>
       <Button title="weather api" onPress={()=>openWFromApi(true)}></Button>
@@ -37,10 +39,11 @@ export default function App() {
       <WeatherLines wDataVis={isWDataOpen} closeWData={closeWeatherData}></WeatherLines>
       <WeatherLinesFromApi wApiVis={isWFromApiOpen} closeWApi={closeWeatherFromApi}></WeatherLinesFromApi>
       <WeatherComplain wCompVis={isCompOpen} closeComp={closeWeatherComplaints}></WeatherComplain>
-      <BotNav></BotNav>
-    </View>
-  );
-}
+      </View>
+  );}
+      
+
+
 
 const styles = StyleSheet.create({
   container: {
