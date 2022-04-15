@@ -2,21 +2,42 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
 import TopNav from './topNav';
 import BotNav from './botNav';
+import {db} from '../firebase'
+import { collection, getDocs, query} from "firebase/firestore"; 
+
 
 const OneComplaint = props =>{
+
+
+
+  /*const fetchData =() =>{
+    async function getComment() {
+    const mySnapshot = await db('/Messages');
+    if (mySnapshot.exists()) {
+      const docData = mySnapshot.data();
+      console.log('data is here');
+    }
+  }
+}*/
+
+/*console.log(props.data)*/
+
     return( 
-      <View style={styles.complainCont}>
-      <Text>Weather data location</Text>
-      <Text>Weather data comment</Text>
-      <Text>Forecast data</Text>
-      <Text>Weather data line3</Text>
-      <Text>Weather data line4</Text>
-      <Text>Weather data line5</Text>
-      <Text>Weather data line6</Text>
-      <Text>user email/name</Text>
-      <Text>comment id</Text>
-      <Text>Weather comment date</Text>
+
+      <View>
+      <Text>
+          {props.data[0]}
+      </Text>
+      <Text>
+          {props.data[1]}
+      </Text>
+      <Text>
+          {props.data[2]}
+      </Text>
+
       </View>
+
+
   )
 };
 

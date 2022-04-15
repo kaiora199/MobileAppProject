@@ -1,9 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
 import TopNav from './topNav';
 import BotNav from './botNav';
+import { doc,getFirestore, setDoc, push, get, ref ,addDoc, collection } from "firebase/firestore";
+import {db} from '../firebase'
 
 const WeatherLines = props =>{
+  const [comment, saveNewComment] = useState(' ');
+  const [location, setNewLocation] = useState(' ');
+
+  const inputHandlerComment = (inputFromUser) => {
+    saveNewComment(inputFromUser);
+  }    
+  const inputHandlerLocation = (inputFromUser) => {
+    setNewLocation(inputFromUser);
+  }
+
+
+
+
+  const postMessage = collection(db, '/Messages/');
+  async function addNewComment(location, comment) {
+    const newDoc = await addDoc(postMessage, {
+      location: location,
+      comment: comment
+    })
+  }
+
+  const textClearHandler = () =>{
+    addNewComment(location, comment)
+    saveNewComment(' ')
+    setNewLocation(' ')
+    props.closeWData()             
+  }
+
+
+
+
+
+
     return( 
       <Modal visible={props.wDataVis} animationType='slide'  transparent={true}>
         <TopNav></TopNav>
@@ -17,11 +52,17 @@ const WeatherLines = props =>{
       <Text>clouds</Text>
       </View>
             <TextInput style={styles.weathTextField}
-    placeholder='Your location'/>
+    placeholder='location'
+    onChangeText={inputHandlerLocation}
+    value={location}
+    />
                 <TextInput style={styles.weathTextField}
-    placeholder='Type your review'/>
+    placeholder='comment'
+    onChangeText={inputHandlerComment}
+    value={comment}
+    />
     <View style={styles.buttonContainer}>
-        <Button onPress={props.closeWData} title="Post comment" color="#c4c4c4"></Button>
+        <Button onPress={textClearHandler} title="Post comment" color="#c4c4c4"></Button>
     </View>
     </View>
     <BotNav></BotNav>
@@ -45,7 +86,8 @@ const styles = StyleSheet.create({
       },
       weathTextField:{
           borderWidth: 1,
-          padding: 10
+          padding: 10,
+
       },
       buttonContainer:{
           flex: 0.3,
