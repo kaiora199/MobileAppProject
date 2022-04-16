@@ -9,6 +9,7 @@ import { collection, getDocs, getDoc, query, where, doc, deleteDoc} from "fireba
 const WeatherComplain = props =>{
 const [savedText, saveNewText] = useState(['']);
 const [savedSearch, saveNewSearch] = useState('');
+const [oldRes, newRes] = useState([]);
 
 const inputHandlerSearch = (inputFromUser) => {
   saveNewSearch(inputFromUser);

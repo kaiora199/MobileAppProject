@@ -7,7 +7,8 @@ import { collection, getDocs, getDoc, query, where, doc, deleteDoc} from "fireba
 
 
 const OneComplaint = props =>{
-  //console.log(props.searchString)
+
+
   let uidi = props.data[2]
   const msgRef = collection(db, "Messages")
   const docRef = doc(db, "Messages", `${uidi}`);
@@ -15,6 +16,8 @@ const OneComplaint = props =>{
   async function deleteComment(){
     await deleteDoc(docRef);
   }
+
+
 
   return( 
     <Pressable style={styles.complainCont} onPress={deleteComment}>
