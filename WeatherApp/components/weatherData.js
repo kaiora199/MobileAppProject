@@ -51,6 +51,7 @@ const WeatherLines = props =>{
       <Text>wind</Text>
       <Text>clouds</Text>
       </View>
+          <Text style={styles.textLine}>Location</Text>
             <TextInput style={styles.weathTextField}
     placeholder='location'
     onChangeText={inputHandlerLocation}
@@ -63,6 +64,7 @@ const WeatherLines = props =>{
     />
     <View style={styles.buttonContainer}>
         <Button onPress={textClearHandler} title="Post comment" color="#c4c4c4"></Button>
+        <Button onPress={props.closeWData} title="Close this view" color="#c4c4c4"></Button>
     </View>
     </View>
     <BotNav></BotNav>
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     weatherCont:{
         flex: 0.8,
         flexDirection: 'column',
-        width: 400,
+        width: 450,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',
@@ -88,6 +90,9 @@ const styles = StyleSheet.create({
           borderWidth: 1,
           padding: 10,
 
+      },
+      textLine:{
+        alignSelf: 'center',
       },
       buttonContainer:{
           flex: 0.3,

@@ -40,7 +40,7 @@ const UserLog = props =>{
     
     return( 
 <Modal visible={props.logInVis} animationType='slide' transparent={true}>
-<TopNav></TopNav>
+<TopNav/>
     <View style={styles.userLoginCont}>
             <TextInput style={styles.userTextFieltd}
               value={email}
@@ -60,9 +60,13 @@ const UserLog = props =>{
                 title="Sign Up" 
                 color="#c4c4c4">
         </Button>
+        <Button onPress={props.closeLogIn}
+                title="Continue as a quest" 
+                color="#c4c4c4">
+        </Button>
     </View>
     </View>
-    <BotNav></BotNav>
+    <BotNav/>
     </Modal>
   )
 };
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
     userLoginCont:{
         flex: 0.8,
         flexDirection: 'column',
-        width: 400,
+        width: 450,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',

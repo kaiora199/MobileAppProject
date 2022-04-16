@@ -6,7 +6,7 @@ import BotNav from './botNav';
 const WeatherLinesFromApi = props =>{
     return( 
       <Modal visible={props.wApiVis} animationType='slide'  transparent={true}>
-        <TopNav></TopNav>
+        <TopNav/>
     <View style={styles.weatherApiCont}>
       <View style={styles.dataApiCont}>
         <Text>Location of weather data</Text>
@@ -25,7 +25,7 @@ const WeatherLinesFromApi = props =>{
         <Button onPress={props.closeWApi} title="Close weather forecast" color="#c4c4c4"></Button>
     </View>
     </View>
-    <BotNav></BotNav>
+    <BotNav/>
     </Modal>
   )
 };
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     weatherApiCont:{
         flex: 0.8,
         flexDirection: 'column',
-        width: 400,
+        width: 450,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',

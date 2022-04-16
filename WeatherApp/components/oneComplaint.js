@@ -1,41 +1,39 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Modal, Button, TextInput} from 'react-native';
 import TopNav from './topNav';
 import BotNav from './botNav';
 import {db} from '../firebase'
-import { collection, getDocs, query} from "firebase/firestore"; 
+import { collection, getDocs, getDoc, query, where, doc, deleteDoc} from "firebase/firestore"; 
 
 
 const OneComplaint = props =>{
+  //console.log(props.searchString)
+  let uidi = props.data[2]
+  const msgRef = collection(db, "Messages")
+  const docRef = doc(db, "Messages", `${uidi}`);
 
-
-
-  /*const fetchData =() =>{
-    async function getComment() {
-    const mySnapshot = await db('/Messages');
-    if (mySnapshot.exists()) {
-      const docData = mySnapshot.data();
-      console.log('data is here');
-    }
+  async function deleteComment(){
+    await deleteDoc(docRef);
   }
-}*/
 
-/*console.log(props.data)*/
-
-    return( 
-
+  return( 
+    <Pressable style={styles.complainCont} onPress={deleteComment}>
       <View>
+          <View>
+            <Text>
+              Location: {props.data[1]}
+            </Text>
       <Text>
-          {props.data[0]}
+            Post id: {props.data[2]} 
       </Text>
-      <Text>
-          {props.data[1]}
-      </Text>
-      <Text>
-          {props.data[2]}
-      </Text>
-
       </View>
+      <View style={styles.complaint}>
+      <Text>
+            Comment: {props.data[0]}
+      </Text>
+      </View>
+      </View>
+    </Pressable>
 
 
   )
@@ -43,15 +41,21 @@ const OneComplaint = props =>{
 
 const styles = StyleSheet.create({
       complainCont:{
-        flex: 0.3,
+        flex: 1,
         flexDirection: 'column',
         alignContent: 'center',
         alignSelf: 'center',
-        flexWrap: 'wrap',
+        justifyContent: 'space-around',
         borderWidth: 1,
         borderRadius: 5,
         padding:10,
-        width: 350 
+        width: 400, 
+        margin: 3,
+        backgroundColor: '#ffce94',
+      },
+      complaint:{
+        flex: 1,
+        flexWrap: 'wrap'
       }
 });
 

@@ -6,7 +6,7 @@ import { auth } from '../firebase';
 
 
 
-const BotNav = props =>{
+const TopNav = props =>{
 
    
     const LogOut = () => {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     topNavContainer:{
         flex: 0.1,
         flexDirection: 'row',
-        width: 400,
+        width: 500,
         padding:10,
         alignContent: 'space-around',
         justifyContent: 'space-between',
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default BotNav;
+export default TopNav;

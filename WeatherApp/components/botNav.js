@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button} from 'react-native';
 
-const TopNav = props =>{
+const BotNav = props =>{
     return( 
     <View style={styles.topNavContainer}>
         <Button title="HOME" color="#ffce94"></Button>
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     topNavContainer:{
         flex: 0.1,
         flexDirection: 'row',
-        width: 400,
+        width: 500,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default TopNav;
+export default BotNav;
