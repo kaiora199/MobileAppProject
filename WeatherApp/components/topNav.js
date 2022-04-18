@@ -14,6 +14,7 @@ const TopNav = props =>{
         .signOut()
         console.log('Signed out')
         props.clearE(' ');
+        props.clearUL('')
     }
 
 
@@ -23,6 +24,7 @@ const TopNav = props =>{
         <Button title="Home" color="#ffce94"></Button>
         <TouchableOpacity onPress={LogOut}>
             <Text>{props.user}</Text>
+            <Text>{props.uLoc}</Text>
             <Text>Click to logout</Text>
 
         </TouchableOpacity>

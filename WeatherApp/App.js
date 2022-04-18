@@ -16,7 +16,7 @@ export default function App() {
   const [isWFromApiOpen, openWFromApi] = useState(false)
   const [isCompOpen, openComplaints] = useState(false)
   const [userEmail, setUEmail] = useState(' ');
-
+  const [uLoc, setULoc] = useState(' ');
   const closeLogIn = () =>{
     openLogin(false)
   }
@@ -31,16 +31,16 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <TopNav user={userEmail} clearE={setUEmail}></TopNav>
+      <TopNav user={userEmail} clearE={setUEmail} uLoc={uLoc} clearUL={setULoc}></TopNav>
       <FrontSquare 
       openLogin={openLogin}
       openComplainer={openWData}
       openWeather={openWFromApi}
       openComplaints={openComplaints}
       ></FrontSquare>
-      <UserLog logInVis={isLoginOpen} closeLogIn={closeLogIn} setE={setUEmail}></UserLog>
+      <UserLog logInVis={isLoginOpen} closeLogIn={closeLogIn} setE={setUEmail} setUL={setULoc}></UserLog>
       <WeatherLines wDataVis={isWDataOpen} closeWData={closeWeatherData}></WeatherLines>
-      <WeatherLinesFromApi wApiVis={isWFromApiOpen} closeWApi={closeWeatherFromApi}></WeatherLinesFromApi>
+      <WeatherLinesFromApi uLoc={uLoc} wApiVis={isWFromApiOpen} closeWApi={closeWeatherFromApi}></WeatherLinesFromApi>
       <WeatherComplain wCompVis={isCompOpen} closeComp={closeWeatherComplaints}></WeatherComplain>
       <BotNav></BotNav>
       </View>

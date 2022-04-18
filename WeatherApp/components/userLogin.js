@@ -8,6 +8,7 @@ import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } fr
 const UserLog = props =>{
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [uLoc, setULoc] = useState("")
 
     const handleSignup = () => {
       auth
@@ -27,12 +28,16 @@ const UserLog = props =>{
           console.log(user.email);
           // ...
           props.setE(email);
+          handleLocation()
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
       });
       props.closeLogIn();
+    }
+    const handleLocation = () =>{
+      props.setUL(uLoc)
     }
      
      
@@ -50,6 +55,10 @@ const UserLog = props =>{
               value={password}
               onChangeText={text => setPassword(text)}
               placeholder='Password'/>
+            <TextInput style={styles.userTextFieltd}
+              value={uLoc}
+              onChangeText={text => setULoc(text)}
+              placeholder='Your location'/>
     <View style={styles.buttonContainer}>
 
         <Button onPress={handleLogin} 

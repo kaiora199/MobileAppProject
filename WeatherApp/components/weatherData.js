@@ -35,7 +35,6 @@ let getSaved = () =>{
     saveNewFeels(data.main.feels_like)
     saveNewWind(data.wind.speed)
     saveNewDesc(data.weather[0].main)
-    console.log(savedLocation+" "+savedTemp+" "+savedFeels+" "+savedWind+" "+savedDesc)
 
   } else {
     null
@@ -51,7 +50,7 @@ let getSaved = () =>{
     temperature: savedTemp,
     feelsLike: savedFeels,
     wind: savedWind,
-    description: savedDesc
+    description: savedDesc,
   });
   props.closeWData()
 }
@@ -77,15 +76,17 @@ let getSaved = () =>{
       <View style={styles.dataCont}>
       <Text>{data.message}</Text>
       </View>)}
-      
+      <Text>Your location</Text>
             <TextInput style={styles.weathTextField}
     placeholder='Your location' onChange={(e)=>setLocation({input: e.target.value, isLoading: true})} value={location.input}/>
+    <Text>Your review</Text>
                 <TextInput style={styles.weathTextField}
     placeholder='Type your review'
     value={savedComment}
     onChangeText={inputHandlerComment}/>
     <View style={styles.buttonContainer}>
         <Button onPress={makeComment} title="Post comment" color="#c4c4c4"></Button>
+        <Button onPress={props.closeWData} title="Close this view" color="#c4c4c4"></Button>
     </View>
     </View>
     <BotNav></BotNav>

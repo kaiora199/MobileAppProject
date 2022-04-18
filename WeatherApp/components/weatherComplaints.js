@@ -22,16 +22,17 @@ const inputHandlerSearch = (inputFromUser) => {
     const messageQuery = query(
       collection(db,'/Messages')
       );
-      
       const msgList = [];
       const querySnapshot = await getDocs(messageQuery);
       const allDocs = querySnapshot.forEach((snap) =>{
-      //console.log(querySnapshot);
-      const comment =snap.data().comment;
+      const temperature = snap.data().temperature
+      const feelsLike = snap.data().feelsLike
+      const wind = snap.data().wind
+      const description = snap.data().description
+      const comment = snap.data().comment;
       const location = snap.data().location;
-
         const uid = snap.id;    
-        msgList.push([comment,location,uid]);
+        msgList.push([comment,location,uid,temperature,feelsLike,wind,description]);
     }
       );
       saveNewText(msgList);
