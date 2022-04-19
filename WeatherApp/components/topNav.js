@@ -37,12 +37,11 @@ const styles = StyleSheet.create({
     topNavContainer:{
         flex: 0.1,
         flexDirection: 'row',
-        width: 500,
+        width: 400,
         padding:10,
         alignContent: 'space-around',
         justifyContent: 'space-between',
         alignSelf: 'center',
-        marginTop: 10,
         backgroundColor: '#ffce94',
         borderRadius: 5
       },

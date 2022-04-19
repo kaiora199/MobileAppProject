@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     weatherCont:{
         flex: 1,
         flexDirection: 'column',
-        width: 450,
+        width: 400,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',

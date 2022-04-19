@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         padding:10,
-        width: 400, 
+        width: 380, 
         margin: 3,
         backgroundColor: '#ffce94',
       },
       complaint:{
         flex: 1,
-        flexWrap: 'wrap'
+        flexWrap: 'nowrap'
       }
 });
 

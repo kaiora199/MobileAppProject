@@ -17,10 +17,18 @@ const WeatherLines = props =>{
   const [data, setData] = useState(null)
   const [location, setLocation] =useState({input: "", isLoading: false})
 
+
+
   useEffect(()=>{
+    setData(null);
     const cb = setTimeout(()=>{
+
       getLocation(location.input).then(data => {
-        setData(data)
+        if (data.cod === "400" || data.cod === "404") {
+          setData(null)
+        } else {
+          setData(data)
+        }
         setLocation({...location, isLoading: false})
       })
     },3000)
@@ -31,8 +39,8 @@ const WeatherLines = props =>{
 let getSaved = () =>{
   if (data!=null&&!location.isLoading&& data.weather!=null) {
     saveNewLocation(data.name)
-    saveNewTemp(data.main.temp)
-    saveNewFeels(data.main.feels_like)
+    saveNewTemp(Math.floor(data.main.temp - 273.15))
+    saveNewFeels(Math.floor(data.main.feels_like - 273.15))
     saveNewWind(data.wind.speed)
     saveNewDesc(data.weather[0].main)
 
@@ -68,9 +76,9 @@ let getSaved = () =>{
     <View style={styles.dataCont} onLayout={getSaved}>
       <Text>{data.name}</Text>
       {data.weather.length > 0 && <Text>{data.weather[0].main}</Text>}
-      <Text>{data.main.temp}</Text>
-      <Text>{data.main.feels_like}</Text>
-      <Text>{data.wind.speed}</Text>
+      <Text>Temperature:   {Math.floor(data.main.temp - 273.15)}°C</Text>
+      <Text>Feels like:   {Math.floor(data.main.feels_like - 273.15)}°C</Text>
+      <Text>Wind speed:   {data.wind.speed} m/s</Text>
       </View>)}
       {!location.isLoading && data !== null && data.message && (
       <View style={styles.dataCont}>
@@ -78,14 +86,15 @@ let getSaved = () =>{
       </View>)}
       <Text>Your location</Text>
             <TextInput style={styles.weathTextField}
-    placeholder='Your location' onChange={(e)=>setLocation({input: e.target.value, isLoading: true})} value={location.input}/>
+    placeholder='Your location' onChangeText={(text)=>setLocation({input: text, isLoading: true})} value={location.input}/>
     <Text>Your review</Text>
                 <TextInput style={styles.weathTextField}
     placeholder='Type your review'
     value={savedComment}
     onChangeText={inputHandlerComment}/>
     <View style={styles.buttonContainer}>
-        <Button onPress={makeComment} title="Post comment" color="#c4c4c4"></Button>
+        <Button disabled={
+          data === null } onPress={makeComment} title="Post comment" color="#c4c4c4"></Button>
         <Button onPress={props.closeWData} title="Close this view" color="#c4c4c4"></Button>
     </View>
     </View>
@@ -98,7 +107,7 @@ const styles = StyleSheet.create({
     weatherCont:{
         flex: 0.8,
         flexDirection: 'column',
-        width: 450,
+        width: 400,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',

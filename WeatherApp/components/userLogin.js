@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     userLoginCont:{
         flex: 0.8,
         flexDirection: 'column',
-        width: 450,
+        width: 400,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',
