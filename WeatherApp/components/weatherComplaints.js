@@ -1,51 +1,63 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput, FlatList, Pressable} from 'react-native';
-import TopNav from './topNav';
-import BotNav from './botNav';
 import OneComplaint from './oneComplaint';
 import {db} from '../firebase';
-import { collection, getDocs, getDoc, query, where, doc, deleteDoc} from "firebase/firestore"; 
+import { collection, getDocs, getDoc, query, where, doc, deleteDoc, orderBy} from "firebase/firestore"; 
 
 const WeatherComplain = props =>{
 const [savedText, saveNewText] = useState(['']);
 const [savedSearch, saveNewSearch] = useState('');
-const [oldRes, newRes] = useState([]);
-
+const capitalSearch = savedSearch.charAt(0).toUpperCase() + savedSearch.slice(1);
 const inputHandlerSearch = (inputFromUser) => {
   saveNewSearch(inputFromUser);
 }
- 
 
-
-  
   async function queryForDocuments() {
-    const messageQuery = query(
-      collection(db,'/Messages')
-      );
+    const messageQuery = query(collection(db,'/Messages'));
       const msgList = [];
       const querySnapshot = await getDocs(messageQuery);
       const allDocs = querySnapshot.forEach((snap) =>{
       const temperature = snap.data().temperature
+      const time = snap.data().time.toDate().toString()
       const feelsLike = snap.data().feelsLike
       const wind = snap.data().wind
       const description = snap.data().description
       const comment = snap.data().comment;
       const location = snap.data().location;
         const uid = snap.id;    
-        msgList.push([comment,location,uid,temperature,feelsLike,wind,description]);
+        msgList.push([comment,location,uid,temperature,feelsLike,wind,description, time]);
+    }
+      );
+      saveNewText(msgList);
+  }
+
+  async function searchByCity() {
+    const messageQuery = query(collection(db,'/Messages'),where("location","==",capitalSearch));
+      const msgList = [];
+      const querySnapshot = await getDocs(messageQuery);
+      const allDocs = querySnapshot.forEach((snap) =>{
+      const temperature = snap.data().temperature
+      const time = snap.data().time.toDate().toString()
+      const feelsLike = snap.data().feelsLike
+      const wind = snap.data().wind
+      const description = snap.data().description
+      const comment = snap.data().comment;
+      const location = snap.data().location;
+        const uid = snap.id;    
+        msgList.push([comment,location,uid,temperature,feelsLike,wind,description, time]);
     }
       );
       saveNewText(msgList);
   }
 
     return( 
-      <Modal visible={props.wCompVis} animationType='slide'  transparent={true}>
-        <TopNav></TopNav>
+  <Modal visible={props.wCompVis} animationType='slide'  transparent={true}>
+    <View style={styles.spacer}></View> 
     <View style={styles.weatherCont}>
     <Text style={styles.textLine}>You can delete posts by clicking them!</Text>
         <View style={styles.searchCont}>
-        <TextInput onChangeText={inputHandlerSearch} value={savedSearch} placeholder="Search for location" style={styles.weatherSearch}></TextInput>
-        <Pressable style={styles.searchButton}>
+        <TextInput autoCapitalize='words' onChangeText={inputHandlerSearch} value={savedSearch} placeholder="Search for location" style={styles.weatherSearch}></TextInput>
+        <Pressable onPress={searchByCity} style={styles.searchButton}>
           <Text>Search</Text>
         </Pressable>
         </View>
@@ -62,30 +74,30 @@ const inputHandlerSearch = (inputFromUser) => {
             key={item.id}
             data={item}
             dbq={queryForDocuments}
-            searchString={savedSearch}/>
+            />
       )}> </FlatList>
-    <Pressable onPress={props.closeComp} style={styles.buttonContainer}>
+      <Pressable onPress={props.closeComp} style={styles.buttonContainer}>
         <Text style={styles.textLine}>Close this view</Text>
-    </Pressable>
+      </Pressable>
     </View>
-    <BotNav></BotNav>
-    </Modal>
+  </Modal>
   )
 };
 
 const styles = StyleSheet.create({
     weatherCont:{
-        flex: 1,
+        flex: 0.8,
         flexDirection: 'column',
         width: 400,
         padding:10,
         alignContent: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignSelf: 'center',
-        marginTop: 10,
         backgroundColor: '#ffce94',
         borderRadius: 5,
-        borderWidth: 0.5
+        borderWidth: 0.5,
+        marginTop: 5,
+        marginBottom: 5,
       },
       buttonContainer:{
         width:300,
@@ -96,6 +108,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 5,
         margin:5,
+      },
+      spacer:{
+        flex:0.1
       },
       complainers:{
         flex: 1,
@@ -137,7 +152,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         borderRadius: 5,
-      }
+      },
+      topNavContainer:{
+        flex: 0.1,
+        flexDirection: 'row',
+        width: 400,
+        padding:10,
+        alignContent: 'space-around',
+        justifyContent: 'space-between',
+        alignSelf: 'center',
+        backgroundColor: '#ffce94',
+        borderRadius: 5
+      },
 });
 
 export default WeatherComplain;

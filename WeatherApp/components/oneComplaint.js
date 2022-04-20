@@ -7,8 +7,9 @@ import { collection, getDocs, getDoc, query, where, doc, deleteDoc} from "fireba
 
 
 const OneComplaint = props =>{
-
-  console.log(props)
+  if(props.data[7]!=null)
+  {var time = props.data[7].slice(0,24)
+}
   let uidi = props.data[2]
   const msgRef = collection(db, "Messages")
   const docRef = doc(db, "Messages", `${uidi}`);
@@ -16,9 +17,6 @@ const OneComplaint = props =>{
   async function deleteComment(){
     await deleteDoc(docRef);
   }
-
-
-  //console.log(props)
   return( 
     <Pressable style={styles.complainCont} onPress={deleteComment}>
       <View>
@@ -30,16 +28,19 @@ const OneComplaint = props =>{
             Description: {props.data[6]} 
       </Text>
       <Text>
-            Temperature: {props.data[3]} 
+            Temperature: {props.data[3]}°C
       </Text>
       <Text>
-            Feels like: {props.data[4]} 
+            Feels like: {props.data[4]}°C
       </Text>
       <Text>
-            Wind speed: {props.data[5]} 
+            Wind speed: {props.data[5]}m/s
       </Text>
       </View>
       <View style={styles.complaint}>
+      <Text>
+            Time: {time}
+      </Text>
       <Text>
             Comment: {props.data[0]}
       </Text>
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         padding:10,
-        width: 380, 
+        width: 375, 
         margin: 3,
         backgroundColor: '#ffce94',
       },

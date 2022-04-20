@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Modal, Button} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Modal, Button} from 'react-native';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase';
 
@@ -7,7 +7,7 @@ import { auth } from '../firebase';
 
 
 const TopNav = props =>{
-
+    
    
     const LogOut = () => {
         auth
@@ -17,17 +17,36 @@ const TopNav = props =>{
         props.clearUL('')
     }
 
-
-
-    return( 
+    return(
     <View style={styles.topNavContainer}>
         <Button title="Home" color="#ffce94"></Button>
-        <TouchableOpacity onPress={LogOut}>
-            <Text>{props.user}</Text>
-            <Text>{props.uLoc}</Text>
-            <Text>Click to logout</Text>
+            {props.user !== ' ' && <Pressable
+            onPress={LogOut}
+            style={({ pressed }) => [
+            {
+                backgroundColor: pressed
+                ? '#f2e1c7'
+                : '#e2d2ba'
+            },
+            styles.userCont
+            ]}>
+    <Text>{props.user}</Text>
+    <Text>{props.uLoc}</Text>
+    <Text>Click to logout</Text>
+            </Pressable>}
 
-        </TouchableOpacity>
+            {props.user === ' ' && <Pressable
+            onPress={props.openLogin}
+            style={({ pressed }) => [
+            {
+                backgroundColor: pressed
+                ? '#f2e1c7'
+                : '#e2d2ba'
+            },
+            styles.userCont2
+            ]}>
+    <Text>Log in</Text>
+            </Pressable>}
         <Button title="Logo" color="#ffce94"></Button>
     </View>
   )
@@ -35,16 +54,34 @@ const TopNav = props =>{
 
 const styles = StyleSheet.create({
     topNavContainer:{
-        flex: 0.1,
+        flex: 0.09,
         flexDirection: 'row',
         width: 400,
-        padding:10,
-        alignContent: 'space-around',
-        justifyContent: 'space-between',
+        padding:5,
+        alignContent: 'center',
+        alignItems:'center',
+        justifyContent: 'space-around',
         alignSelf: 'center',
         backgroundColor: '#ffce94',
         borderRadius: 5
       },
+      userCont:{
+          padding:5,
+          borderRadius: 10,
+          alignContent: 'center',
+          alignItems:'center',
+          justifyContent: 'space-around',
+          alignSelf: 'center',
+      },
+      userCont2:{
+        width: 90,
+        padding:25,
+        borderRadius: 10,
+        alignContent: 'center',
+        alignItems:'center',
+        justifyContent: 'space-around',
+        alignSelf: 'center',
+    }
 });
 
 export default TopNav;

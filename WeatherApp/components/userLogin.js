@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
-import TopNav from './topNav';
-import BotNav from './botNav';
 import {auth} from '../firebase';
 import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -45,8 +43,11 @@ const UserLog = props =>{
     
     return( 
 <Modal visible={props.logInVis} animationType='slide' transparent={true}>
-<TopNav/>
+<View style={styles.spacer}></View> 
     <View style={styles.userLoginCont}>
+      <Text style={styles.textLine}>
+        You will need to log in again to update your login.
+      </Text>
             <TextInput style={styles.userTextFieltd}
               value={email}
               onChangeText={text => setEmail(text)}
@@ -75,7 +76,6 @@ const UserLog = props =>{
         </Button>
     </View>
     </View>
-    <BotNav/>
     </Modal>
   )
 };
@@ -89,18 +89,37 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'space-around',
         alignSelf: 'center',
-        marginTop: 10,
+        marginTop: 5,
+        marginBottom: 5,
         backgroundColor: '#ffce94',
         borderRadius: 5,
         borderWidth: 0.5
+      },
+      textLine:{
+        alignSelf: 'center',
+          padding: 10
       },
       userTextFieltd:{
           borderWidth: 1,
           padding: 10
       },
+      spacer:{
+        flex:0.1
+      },
       buttonContainer:{
           flex: 0.3,
         justifyContent: 'space-around'
+      },
+      topNavContainer:{
+        flex: 0.1,
+        flexDirection: 'row',
+        width: 400,
+        padding:10,
+        alignContent: 'space-around',
+        justifyContent: 'space-between',
+        alignSelf: 'center',
+        backgroundColor: '#ffce94',
+        borderRadius: 5
       },
 });
 

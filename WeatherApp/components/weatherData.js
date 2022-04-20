@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput} from 'react-native';
-import TopNav from './topNav';
-import BotNav from './botNav';
 import { getLocation } from '../API/API';
-import {db} from '../firebase';
-import { collection, getDocs, getDoc, query, where, doc, deleteDoc,addDoc} from "firebase/firestore";
-
+import {db,app} from '../firebase';
+import { collection, getDocs, getDoc, query, where, doc, deleteDoc,addDoc,Timestamp} from "firebase/firestore";
 
 const WeatherLines = props =>{
   const [savedComment, saveNewComment] = useState('');
@@ -18,7 +15,7 @@ const WeatherLines = props =>{
   const [location, setLocation] =useState({input: "", isLoading: false})
 
 
-
+  
   useEffect(()=>{
     setData(null);
     const cb = setTimeout(()=>{
@@ -59,23 +56,23 @@ let getSaved = () =>{
     feelsLike: savedFeels,
     wind: savedWind,
     description: savedDesc,
+    time: Timestamp.now()
   });
   props.closeWData()
 }
   
 
     return( 
-      <Modal visible={props.wDataVis} animationType='slide'  transparent={true}>
-        <TopNav></TopNav>
-        
+  <Modal visible={props.wDataVis} animationType='slide'  transparent={true}>
+    <View style={styles.spacer}></View>      
     <View style={styles.weatherCont}>
       {location.isLoading && <View style={styles.dataCont}>
       <Text>Loading...</Text>
       </View>}
     {!location.isLoading && data !== null && data.name && (
     <View style={styles.dataCont} onLayout={getSaved}>
-      <Text>{data.name}</Text>
-      {data.weather.length > 0 && <Text>{data.weather[0].main}</Text>}
+      <Text>Location:   {data.name}</Text>
+      {data.weather.length > 0 && <Text>Description:   {data.weather[0].main}</Text>}
       <Text>Temperature:   {Math.floor(data.main.temp - 273.15)}°C</Text>
       <Text>Feels like:   {Math.floor(data.main.feels_like - 273.15)}°C</Text>
       <Text>Wind speed:   {data.wind.speed} m/s</Text>
@@ -98,8 +95,7 @@ let getSaved = () =>{
         <Button onPress={props.closeWData} title="Close this view" color="#c4c4c4"></Button>
     </View>
     </View>
-    <BotNav></BotNav>
-    </Modal>
+  </Modal>
   )
 };
 
@@ -112,7 +108,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'space-around',
         alignSelf: 'center',
-        marginTop: 10,
+        marginTop: 5,
+        marginBottom: 5,
         backgroundColor: '#ffce94',
         borderRadius: 5,
         borderWidth: 0.5
@@ -120,7 +117,9 @@ const styles = StyleSheet.create({
       weathTextField:{
           borderWidth: 1,
           padding: 10,
-
+      },
+      spacer:{
+        flex:0.1
       },
       textLine:{
         alignSelf: 'center',
@@ -131,11 +130,26 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
       },
       dataCont:{
-        flex: 0.5,
+        flex: 0.4,
         flexDirection: 'column',
         alignContent: 'space-around',
+        justifyContent: 'space-around',
         flexWrap: 'wrap',
-      }
+        backgroundColor: '#e2d2ba',
+        borderRadius: 5,
+        borderWidth: 0.5
+      },
+      topNavContainer:{
+        flex: 0.1,
+        flexDirection: 'row',
+        width: 400,
+        padding:10,
+        alignContent: 'space-around',
+        justifyContent: 'space-between',
+        alignSelf: 'center',
+        backgroundColor: '#ffce94',
+        borderRadius: 5
+      },
 });
 
 export default WeatherLines;

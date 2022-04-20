@@ -12,9 +12,9 @@ const BotNav = props =>{
 
 const styles = StyleSheet.create({
     topNavContainer:{
-        flex: 0.1,
+        flex: 0.09,
         flexDirection: 'row',
-        width: 500,
+        width: 400,
         padding:10,
         alignContent: 'center',
         justifyContent: 'space-around',
