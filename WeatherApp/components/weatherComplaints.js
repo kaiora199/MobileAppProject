@@ -13,7 +13,7 @@ const inputHandlerSearch = (inputFromUser) => {
 }
 
   async function queryForDocuments() {
-    const messageQuery = query(collection(db,'/Messages'));
+    const messageQuery = query(collection(db,'/Messages'),orderBy('time','desc'));
       const msgList = [];
       const querySnapshot = await getDocs(messageQuery);
       const allDocs = querySnapshot.forEach((snap) =>{
@@ -52,7 +52,7 @@ const inputHandlerSearch = (inputFromUser) => {
 
     return( 
   <Modal visible={props.wCompVis} animationType='slide'  transparent={true}>
-    <View style={styles.spacer}></View> 
+    <View onLayout={queryForDocuments} style={styles.spacer}></View> 
     <View style={styles.weatherCont}>
     <Text style={styles.textLine}>You can delete posts by clicking them!</Text>
         <View style={styles.searchCont}>
@@ -64,8 +64,7 @@ const inputHandlerSearch = (inputFromUser) => {
         <Pressable style={styles.refresher} onPress={queryForDocuments}>
           <Text style={styles.textLine}>Refresh complaints</Text>
         </Pressable>
-      <FlatList
-          onLayout={queryForDocuments} 
+      <FlatList 
           style={styles.complainers}
           keyGetter={(item)=> item.id}
           data={savedText}
