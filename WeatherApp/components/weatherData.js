@@ -71,20 +71,20 @@ let getSaved = () =>{
       </View>}
     {!location.isLoading && data !== null && data.name && (
     <View style={styles.dataCont} onLayout={getSaved}>
-      <Text>Location:   {data.name}</Text>
-      {data.weather.length > 0 && <Text>Description:   {data.weather[0].main}</Text>}
-      <Text>Temperature:   {Math.floor(data.main.temp - 273.15)}°C</Text>
-      <Text>Feels like:   {Math.floor(data.main.feels_like - 273.15)}°C</Text>
-      <Text>Wind speed:   {data.wind.speed} m/s</Text>
+      <Text style={styles.textLine}>Location:   {data.name}</Text>
+      {data.weather.length > 0 && <Text style={styles.textLine}>Description:   {data.weather[0].main}</Text>}
+      <Text style={styles.textLine}>Temperature:   {Math.floor(data.main.temp - 273.15)}°C</Text>
+      <Text style={styles.textLine}>Feels like:   {Math.floor(data.main.feels_like - 273.15)}°C</Text>
+      <Text style={styles.textLine}>Wind speed:   {data.wind.speed} m/s</Text>
       </View>)}
       {!location.isLoading && data !== null && data.message && (
       <View style={styles.dataCont}>
-      <Text>{data.message}</Text>
+      <Text style={styles.textLine}>{data.message}</Text>
       </View>)}
-      <Text>Your location</Text>
+      <Text style={styles.textLine}>Your location</Text>
             <TextInput style={styles.weathTextField}
     placeholder='Your location' onChangeText={(text)=>setLocation({input: text, isLoading: true})} value={location.input}/>
-    <Text>Your review</Text>
+    <Text style={styles.textLine}>Your review</Text>
                 <TextInput style={styles.weathTextField}
     placeholder='Type your review'
     value={savedComment}
@@ -101,7 +101,7 @@ let getSaved = () =>{
 
 const styles = StyleSheet.create({
     weatherCont:{
-        flex: 0.8,
+        flex: 1,
         flexDirection: 'column',
         width: 400,
         padding:10,

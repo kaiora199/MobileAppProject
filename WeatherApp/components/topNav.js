@@ -54,10 +54,11 @@ const TopNav = props =>{
 
 const styles = StyleSheet.create({
     topNavContainer:{
-        flex: 0.09,
+        flex: 0.1,
         flexDirection: 'row',
-        width: 400,
-        padding:5,
+        width: 420,
+        padding:10,
+        marginTop: 10,
         alignContent: 'center',
         alignItems:'center',
         justifyContent: 'space-around',
@@ -74,8 +75,8 @@ const styles = StyleSheet.create({
           alignSelf: 'center',
       },
       userCont2:{
-        width: 90,
-        padding:25,
+        width: 100,
+        padding:20,
         borderRadius: 10,
         alignContent: 'center',
         alignItems:'center',

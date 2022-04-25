@@ -82,7 +82,7 @@ const UserLog = props =>{
 
 const styles = StyleSheet.create({
     userLoginCont:{
-        flex: 0.8,
+        flex: 1,
         flexDirection: 'column',
         width: 400,
         padding:10,

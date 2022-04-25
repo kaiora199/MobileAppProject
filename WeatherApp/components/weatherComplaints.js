@@ -85,7 +85,7 @@ const inputHandlerSearch = (inputFromUser) => {
 
 const styles = StyleSheet.create({
     weatherCont:{
-        flex: 0.8,
+        flex: 1,
         flexDirection: 'column',
         width: 400,
         padding:10,

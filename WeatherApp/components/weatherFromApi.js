@@ -37,15 +37,15 @@ const WeatherLinesFromApi = props =>{
         <View style={styles.spacer}></View> 
         <View style={styles.weatherCont} onLayout={saveLocationSearch}>
           {location.isLoading && <View style={styles.dataCont}>
-          <Text>Loading...</Text>
+          <Text style={styles.textLine}>Loading...</Text>
           </View>}
         {!location.isLoading && data !== null && data.name && (
         <View style={styles.dataCont}>
-          <Text>{data.name}</Text>
-          {data.weather.length > 0 && <Text>{data.weather[0].main}</Text>}
-          <Text>Temperature:   {Math.floor(data.main.temp - 273.15)}°C</Text>
-          <Text>Feels like:   {Math.floor(data.main.feels_like - 273.15)}°C</Text>
-          <Text>Wind speed:   {data.wind.speed} m/s</Text>
+          <Text style={styles.textLine}>{data.name}</Text>
+          {data.weather.length > 0 && <Text style={styles.textLine}>{data.weather[0].main}</Text>}
+          <Text style={styles.textLine}>Temperature:   {Math.floor(data.main.temp - 273.15)}°C</Text>
+          <Text style={styles.textLine}>Feels like:   {Math.floor(data.main.feels_like - 273.15)}°C</Text>
+          <Text style={styles.textLine}>Wind speed:   {data.wind.speed} m/s</Text>
           </View>)}
           {!location.isLoading && data !== null && data.message && (
           <View style={styles.dataCont}>
@@ -61,7 +61,7 @@ const WeatherLinesFromApi = props =>{
 
 const styles = StyleSheet.create({
   weatherCont:{
-    flex: 0.8,
+    flex: 1,
     flexDirection: 'column',
     width: 400,
     padding:10,
@@ -109,6 +109,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#ffce94',
     borderRadius: 5
+  },
+  textLine:{
+    alignSelf: 'center',
+      padding: 10
   },
 });
 
